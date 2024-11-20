@@ -151,8 +151,8 @@ export default function WeatherComponent() {
             <div className="flex flex-col gap-2">
               {/* 1 Row! */}
               <div className="flex justify-around max-md:flex-col">
-                <div className="flex justify-center bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9 max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
-                  <div className="flex flex-col justify-around items-center gap-3">
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9 max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                  <div className="flex flex-col justify-center items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Temperature: {weather.current.temp_c}°C</p>
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Temperature: {weather.current.temp_f}°F</p>
                   </div>
@@ -162,10 +162,10 @@ export default function WeatherComponent() {
                   </video>
                 </div>
 
-                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md">
-                  <div className="flex flex-col justify-around items-center gap-3">
-                    <p className="bg-red-300 py-7 px-10 text-sm  rounded-full bg-opacity-25">Feels like: {weather.current.feelslike_f}°F</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Feels like: {weather.current.feelslike_c}°C</p>
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                  <div className="flex flex-col justify-center items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Feels like: {weather.current.feelslike_f}°F</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Feels like: {weather.current.feelslike_c}°C</p>
                   </div>
 
                   <video autoPlay loop muted width={100} height={100}>
@@ -176,11 +176,11 @@ export default function WeatherComponent() {
 
               {/* 2 Row! */}
               <div className="flex justify-around max-md:flex-col">
-                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md">
-                  <div className="flex flex-col justify-around items-center gap-3">
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Wind speed: {weather.current.wind_kph}/kph</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Wind speed: {weather.current.wind_mph}mph</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Wind direction: {weather.current.wind_dir}</p>
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                  <div className="flex flex-col justify-center items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Wind speed: {weather.current.wind_kph}/kph</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Wind speed: {weather.current.wind_mph}mph</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Wind direction: {weather.current.wind_dir}</p>
                   </div>
 
                   <video autoPlay loop muted width={130} height={130}>
@@ -188,11 +188,11 @@ export default function WeatherComponent() {
                   </video>
                 </div>
 
-                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md">
-                  <div className="flex flex-col justify-around text-center gap-3">
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Condition: {weather.current.condition.text}</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Humidity: {weather.current.humidity}</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">UV: {weather.current.uv}</p>
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                  <div className="flex flex-col justify-center text-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Condition: {weather.current.condition.text}</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Humidity: {weather.current.humidity}</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">UV: {weather.current.uv}</p>
                   </div>
 
                   <video autoPlay loop muted width={130} height={130}>
@@ -203,10 +203,10 @@ export default function WeatherComponent() {
 
               {/* 3 Row! */}
               <div className="flex justify-around max-md:flex-col">
-                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm">
-                  <div className="flex flex-col justify-around items-center gap-3">
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Pressure: {weather.current.pressure_mb}mb</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Pressure: {weather.current.pressure_in}in</p>
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                  <div className="flex flex-col justify-center items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Pressure: {weather.current.pressure_mb}mb</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Pressure: {weather.current.pressure_in}in</p>
                   </div>
 
                   <video autoPlay loop muted width={150} height={150}>
@@ -214,10 +214,10 @@ export default function WeatherComponent() {
                   </video>
                 </div>
 
-                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm">
-                  <div className="flex flex-col justify-around items-center gap-3">
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Dewpoint: {weather.current.dewpoint_f}°F</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Dewpoint: {weather.current.dewpoint_c}°C</p>
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                  <div className="flex flex-col justify-center items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Dewpoint: {weather.current.dewpoint_f}°F</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Dewpoint: {weather.current.dewpoint_c}°C</p>
                   </div>
 
                   <video autoPlay loop muted width={150} height={150}>
