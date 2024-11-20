@@ -13,11 +13,19 @@
     --foreground: #ededed;
   }
 }
-
+*{
+  outline: none;
+  transition: all;
+}
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lacquer", system-ui;
+  /* color: black; */
+}
+
+input {
+  color: black;
 }
 
 @layer utilities {

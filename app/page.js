@@ -1,101 +1,258 @@
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect } from "react";
 
-export default function Home() {
+export default function WeatherComponent() {
+  const [weather, setWeather] = useState(null); // State for weather data
+  const [error, setError] = useState(null); // State for error handling
+  const [location, setLocation] = useState(""); // State for input location
+  const [isFetching, setIsFetching] = useState(false); // State for loading
+  const [useManualInput, setUseManualInput] = useState(false); // State to switch to manual input
+
+  useEffect(() => {
+    // Attempt to detect location on component load
+    detectLocationAndFetchWeather();
+  }, []);
+
+  const detectLocationAndFetchWeather = () => {
+    if (!navigator.geolocation) {
+      setError("Geolocation is not supported by your browser.");
+      setUseManualInput(true); // Enable manual input
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        fetchWeatherByCoordinates(latitude, longitude);
+      },
+      () => {
+        setError("Oops! Looks like location access is denied");
+        setUseManualInput(true); // Enable manual input
+      }
+    );
+  };
+
+  const fetchWeatherByCoordinates = async (latitude, longitude) => {
+    const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${latitude},${longitude}`;
+    fetchWeather(url);
+  };
+
+  const fetchWeatherByCity = async () => {
+    if (!location.trim()) {
+      setError("Please enter a valid city name.");
+      return;
+    }
+    const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+    fetchWeather(url);
+  };
+
+  const fetchWeather = async (url) => {
+    setError(null); // Reset any previous errors
+    setIsFetching(true); // Set loading to true
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Please enter city name correctly`);
+      }
+
+      const data = await response.json();
+      setWeather(data); // Store weather data
+    } catch (err) {
+      setError(err.message); // Handle errors
+    } finally {
+      setIsFetching(false); // Stop loading indicator
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      {/* Error message display */}
+      {error && <div className="flex justify-center items-center h-[35vh]">
+        <p className="text-red-300 text-xl">
+          {error}
+        </p>
+      </div>}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Input and button for manual input */}
+      {useManualInput && (
+        <div className="flex flex-col gap-5">
+          {/* Show this message only if weather is not fetched */}
+          {!weather && (
+            <span className="flex justify-center">No Problem! Get Weather info by searching your city name</span>
+          )}
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Enter city name"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  fetchWeatherByCity(); // Trigger the button click function
+                }
+              }}
+              className="px-4 py-2 border rounded-3xl shadow-md w-[80%] max-w-sm"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <button onClick={fetchWeatherByCity} className="bg-violet-700 text-white px-4 py-2 rounded-3xl hover:bg-violet-800 shadow-md">Get Weather</button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      )}
+
+      {/* Loading indicator */}
+      {
+      isFetching &&
+        <div>
+          {/* <p className="absolute">Fetching Weather Data...</p> */}
+          <video autoPlay loop muted width={135} height={135} className="absolute left-[45vw] top-[38vh]">
+            <source src="Loading.webm" type="video/webm" />
+          </video>
+
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-16">
+            <source src="ContentLoading.webm" type="video/webm" />
+          </video>
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-80">
+            <source src="ContentLoading.webm" type="video/webm" />
+          </video>
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-[36rem]">
+            <source src="ContentLoading.webm" type="video/webm" />
+          </video>
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-16">
+            <source src="ContentLoading.webm" type="video/webm" />
+          </video>
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-80">
+            <source src="ContentLoading.webm" type="video/webm" />
+          </video>
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-[36rem]">
+            <source src="ContentLoading.webm" type="video/webm" />
+          </video>
+        </div>
+      }
+
+      {/* Weather info display */}
+      {weather && (
+        <div>
+          <div className="">
+
+            <div className="flex justify-center">
+              <div className="flex items-center text-purple-200">
+                <h1 className="bg-orange-400 bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-full  border-violet-200 shadow-md  text-lg">
+                  Weather in
+                  <span className="mx-1">{weather.location.name}</span>
+                </h1>
+                <video autoPlay loop muted width={100} height={100}>
+                  <source src="CloudAndSun.webm" type="video/webm" />
+                </video>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              {/* 1 Row! */}
+              <div className="flex justify-around">
+                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9">
+                  <div className="flex flex-col justify-around items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm  rounded-full bg-opacity-25">Temperature: {weather.current.temp_c}°C</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Temperature: {weather.current.temp_f}°F</p>
+                  </div>
+
+                  <video autoPlay loop muted width={45} height={45}>
+                    <source src="Thermometer.webm" type="video/webm" />
+                  </video>
+                </div>
+
+                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md">
+                  <div className="flex flex-col justify-around items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm  rounded-full bg-opacity-25">Feels like: {weather.current.feelslike_f}°F</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Feels like: {weather.current.feelslike_c}°C</p>
+                  </div>
+
+                  <video autoPlay loop muted width={100} height={100}>
+                    <source src="UV.webm" type="video/webm" />
+                  </video>
+                </div>
+              </div>
+
+              {/* 2 Row! */}
+              <div className="flex justify-around">
+                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md">
+                  <div className="flex flex-col justify-around items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Wind speed: {weather.current.wind_kph}/kph</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Wind speed: {weather.current.wind_mph}mph</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Wind direction: {weather.current.wind_dir}</p>
+                  </div>
+
+                  <video autoPlay loop muted width={130} height={130}>
+                    <source src="Wind.webm" type="video/webm" />
+                  </video>
+                </div>
+
+                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md">
+                  <div className="flex flex-col justify-around text-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Condition: {weather.current.condition.text}</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Humidity: {weather.current.humidity}</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">UV: {weather.current.uv}</p>
+                  </div>
+
+                  <video autoPlay loop muted width={130} height={130}>
+                    <source src="Humidity.webm" type="video/webm" />
+                  </video>
+                </div>
+              </div>
+
+              {/* 3 Row! */}
+              <div className="flex justify-around">
+                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm">
+                  <div className="flex flex-col justify-around items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Pressure: {weather.current.pressure_mb}mb</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Pressure: {weather.current.pressure_in}in</p>
+                  </div>
+
+                  <video autoPlay loop muted width={150} height={150}>
+                    <source src="Wind1.webm" type="video/webm" />
+                  </video>
+                </div>
+
+                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm">
+                  <div className="flex flex-col justify-around items-center gap-3">
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Dewpoint: {weather.current.dewpoint_f}°F</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Dewpoint: {weather.current.dewpoint_c}°C</p>
+                  </div>
+
+                  <video autoPlay loop muted width={150} height={150}>
+                    <source src="Leafs.webm" type="video/webm" />
+                  </video>
+                </div>
+              </div>
+
+              {/* 4 Row! */}
+              {/* <div className="flex">
+                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-40">
+                  <black className="flex flex-col justify-around items-center gap-3">
+                  </black>
+
+                  <video autoPlay loop muted width={100} height={100}>
+                    <source src="Humidity.webm" type="video/webm" />
+                  </video>
+                </div>
+              </div> */}
+
+            </div>
+
+            <div className="relative mt-5">
+              <div className="absolute flex right-0 items-baseline bg-black bg-opacity-5 rounded-l-xl pr-2 pl-4">
+                <video autoPlay loop muted width={70} height={70}>
+                  <source src="LeafAndHouse.webm" type="video/webm" />
+                </video>
+                <p className="ml-3 text-shadow-lg">Last Updated on: {weather.current.last_updated}</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      )}
     </div>
   );
 }
