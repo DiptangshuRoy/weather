@@ -138,7 +138,7 @@ export default function WeatherComponent() {
 
             <div className="flex justify-center">
               <div className="flex items-center text-purple-200">
-                <h1 className="bg-orange-400 bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-full border-violet-200 shadow-md text-lg">
+                <h1 className="bg-orange-400 bg-opacity-20 backdrop-blur-sm px-10 py-2 rounded-full border-violet-200 shadow-md text-lg max-md:py-1 max-md:px-5">
                   Weather in
                   <span className="mx-1">{weather.location.name}</span>
                 </h1>
@@ -148,10 +148,10 @@ export default function WeatherComponent() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 max-md:mt-4">
               {/* 1 Row! */}
-              <div className="flex justify-around max-md:flex-col">
-                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9 max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+              <div className="flex justify-around max-md:flex-col gap-3">
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9 md:w-[650px] max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
                   <div className="flex flex-col justify-center items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Temperature: {weather.current.temp_c}°C</p>
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Temperature: {weather.current.temp_f}°F</p>
@@ -162,21 +162,21 @@ export default function WeatherComponent() {
                   </video>
                 </div>
 
-                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md md:w-[650px] max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
                   <div className="flex flex-col justify-center items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Feels like: {weather.current.feelslike_f}°F</p>
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Feels like: {weather.current.feelslike_c}°C</p>
                   </div>
 
-                  <video autoPlay loop muted width={100} height={100}>
+                  <video autoPlay loop muted width={120} height={120}>
                     <source src="UV.webm" type="video/webm" />
                   </video>
                 </div>
               </div>
 
               {/* 2 Row! */}
-              <div className="flex justify-around max-md:flex-col">
-                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+              <div className="flex justify-around max-md:flex-col gap-6">
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md md:w-[650px] max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
                   <div className="flex flex-col justify-center items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Wind speed: {weather.current.wind_kph}/kph</p>
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Wind speed: {weather.current.wind_mph}mph</p>
@@ -188,7 +188,7 @@ export default function WeatherComponent() {
                   </video>
                 </div>
 
-                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md md:w-[650px] max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
                   <div className="flex flex-col justify-center text-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Condition: {weather.current.condition.text}</p>
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Humidity: {weather.current.humidity}</p>
@@ -203,7 +203,7 @@ export default function WeatherComponent() {
 
               {/* 3 Row! */}
               <div className="flex justify-around max-md:flex-col">
-                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm md:w-[650px] max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
                   <div className="flex flex-col justify-center items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Pressure: {weather.current.pressure_mb}mb</p>
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Pressure: {weather.current.pressure_in}in</p>
@@ -214,7 +214,7 @@ export default function WeatherComponent() {
                   </video>
                 </div>
 
-                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
+                <div className="flex justify-evenly bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm md:w-[650px] max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
                   <div className="flex flex-col justify-center items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Dewpoint: {weather.current.dewpoint_f}°F</p>
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Dewpoint: {weather.current.dewpoint_c}°C</p>
