@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${galindo.className} ${rubikMonoOne.className} ${lacquer.className} ${geistSans.variable} ${geistMono.variable} ${agdasima.className} antialiased h-screen bg-no-repeat`}
       >
-        <div className="absolute inset-0 bg-[url('../public/Background9.jpg')] bg-cover bg-center blur-[4px] bg-no-repeat z-0"></div>
+        <div className="absolute inset-0 bg-[url('../public/Background9.jpg')] bg-cover bg-center blur-[4px] bg-no-repeat max-md:bg-repeat-y z-0"></div>
         <Github />
         <div className="relative z-10">{children}</div>
         <MyName />

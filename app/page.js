@@ -71,7 +71,7 @@ export default function WeatherComponent() {
     <div>
       {/* Error message display */}
       {error && <div className="flex justify-center items-center h-[35vh]">
-        <p className="text-red-300 text-xl">
+        <p className="text-red-300 text-xl text-center">
           {error}
         </p>
       </div>}
@@ -81,7 +81,7 @@ export default function WeatherComponent() {
         <div className="flex flex-col gap-5">
           {/* Show this message only if weather is not fetched */}
           {!weather && (
-            <span className="flex justify-center">No Problem! Get Weather info by searching your city name</span>
+            <span className="flex justify-center text-center">No Problem! Get Weather info by searching your city name</span>
           )}
           <div className="flex justify-center items-center gap-4 mt-6">
             <input
@@ -94,7 +94,7 @@ export default function WeatherComponent() {
                   fetchWeatherByCity(); // Trigger the button click function
                 }
               }}
-              className="px-4 py-2 border rounded-3xl shadow-md w-[80%] max-w-sm"
+              className="px-4 py-2 border rounded-3xl shadow-md w-[80%] max-w-sm max-md:w-[12.5rem]"
             />
             <button onClick={fetchWeatherByCity} className="bg-violet-700 text-white px-4 py-2 rounded-3xl hover:bg-violet-800 shadow-md">Get Weather</button>
           </div>
@@ -106,26 +106,26 @@ export default function WeatherComponent() {
       isFetching &&
         <div>
           {/* <p className="absolute">Fetching Weather Data...</p> */}
-          <video autoPlay loop muted width={135} height={135} className="absolute left-[45vw] top-[38vh]">
+          <video autoPlay loop muted width={135} height={135} className="absolute left-[45vw] top-[38vh] max-md:left-[32.5vw]">
             <source src="Loading.webm" type="video/webm" />
           </video>
 
-          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-16">
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-16 max-md:-left-10">
             <source src="ContentLoading.webm" type="video/webm" />
           </video>
-          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-80">
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-80 max-md:-left-10 max-md:top-96">
             <source src="ContentLoading.webm" type="video/webm" />
           </video>
-          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-[36rem]">
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-60 top-[36rem] max-md:left-40 max-md:top-[27.8rem] max-md:scale-50">
             <source src="ContentLoading.webm" type="video/webm" />
           </video>
-          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-16">
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-16 max-md:hidden">
             <source src="ContentLoading.webm" type="video/webm" />
           </video>
-          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-80">
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-80 max-md:hidden">
             <source src="ContentLoading.webm" type="video/webm" />
           </video>
-          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-[36rem]">
+          <video autoPlay loop muted width={270} height={110} className="absolute z-30 left-[70rem] top-[36rem] max-md:hidden">
             <source src="ContentLoading.webm" type="video/webm" />
           </video>
         </div>
@@ -134,7 +134,7 @@ export default function WeatherComponent() {
       {/* Weather info display */}
       {weather && (
         <div>
-          <div className="">
+          <div>
 
             <div className="flex justify-center">
               <div className="flex items-center text-purple-200">
@@ -150,7 +150,7 @@ export default function WeatherComponent() {
 
             <div className="flex flex-col gap-2">
               {/* 1 Row! */}
-              <div className="flex justify-around">
+              <div className="flex justify-around max-md:flex-col">
                 <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9">
                   <div className="flex flex-col justify-around items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm  rounded-full bg-opacity-25">Temperature: {weather.current.temp_c}°C</p>
@@ -175,7 +175,7 @@ export default function WeatherComponent() {
               </div>
 
               {/* 2 Row! */}
-              <div className="flex justify-around">
+              <div className="flex justify-around max-md:flex-col">
                 <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md">
                   <div className="flex flex-col justify-around items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Wind speed: {weather.current.wind_kph}/kph</p>
@@ -202,7 +202,7 @@ export default function WeatherComponent() {
               </div>
 
               {/* 3 Row! */}
-              <div className="flex justify-around">
+              <div className="flex justify-around max-md:flex-col">
                 <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-sm">
                   <div className="flex flex-col justify-around items-center gap-3">
                     <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Pressure: {weather.current.pressure_mb}mb</p>
@@ -240,7 +240,7 @@ export default function WeatherComponent() {
 
             </div>
 
-            <div className="relative mt-5">
+            <div className="relative mt-5 max-md:hidden">
               <div className="absolute flex right-0 items-baseline bg-black bg-opacity-5 rounded-l-xl pr-2 pl-4">
                 <video autoPlay loop muted width={70} height={70}>
                   <source src="LeafAndHouse.webm" type="video/webm" />
