@@ -138,7 +138,7 @@ export default function WeatherComponent() {
 
             <div className="flex justify-center">
               <div className="flex items-center text-purple-200">
-                <h1 className="bg-orange-400 bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-full  border-violet-200 shadow-md  text-lg">
+                <h1 className="bg-orange-400 bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-full border-violet-200 shadow-md text-lg">
                   Weather in
                   <span className="mx-1">{weather.location.name}</span>
                 </h1>
@@ -151,10 +151,10 @@ export default function WeatherComponent() {
             <div className="flex flex-col gap-2">
               {/* 1 Row! */}
               <div className="flex justify-around max-md:flex-col">
-                <div className="flex bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9">
+                <div className="flex justify-center bg-black rounded-[70px] px-14 py-5 bg-opacity-0 shadow-md backdrop-blur-md gap-9 max-md:p-0 max-md:rounded-3xl max-md:backdrop-blur-none">
                   <div className="flex flex-col justify-around items-center gap-3">
-                    <p className="bg-red-300 py-7 px-10 text-sm  rounded-full bg-opacity-25">Temperature: {weather.current.temp_c}°C</p>
-                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25">Temperature: {weather.current.temp_f}°F</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Temperature: {weather.current.temp_c}°C</p>
+                    <p className="bg-red-300 py-7 px-10 text-sm rounded-full bg-opacity-25 max-md:py-1 max-md:px-3">Temperature: {weather.current.temp_f}°F</p>
                   </div>
 
                   <video autoPlay loop muted width={45} height={45}>
