@@ -78,7 +78,7 @@ export default function WeatherComponent() {
 
       {/* Input and button for manual input */}
       {useManualInput && (
-        <div className="flex flex-col gap-5 md:h-[61vh] max-md:h-[51.5vh]">
+        <div className="flex flex-col gap-5 md:h-[61vh]">
           {/* Show this message only if weather is not fetched */}
           {!weather && (
             <span className="flex justify-center text-center">No Problem! Get Weather info by searching your city name</span>
