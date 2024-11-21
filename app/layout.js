@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 const agdasima = Agdasima({ subsets: ["latin"], weight: ["400", "700"] });
 const lacquer = Lacquer({ subsets: ["latin"], weight: ["400"] });
-const rubikMonoOne  = Rubik_Mono_One({ subsets: ["latin"], weight: ["400"], style: ["normal"] });
+const rubikMonoOne = Rubik_Mono_One({ subsets: ["latin"], weight: ["400"], style: ["normal"] });
 const mysteryQuest = Mystery_Quest({ subsets: ["latin"], weight: ["400"] });
 const peralta = Peralta({ subsets: ["latin"], weight: ["400"] });
 const galindo = Galindo({ subsets: ["latin"], weight: ["400"] });
@@ -30,13 +30,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${galindo.className} ${rubikMonoOne.className} ${lacquer.className} ${geistSans.variable} ${geistMono.variable} ${agdasima.className} antialiased h-screen bg-no-repeat`}
-      >
-        <div className="absolute inset-0 bg-[url('../public/Background9.jpg')] bg-cover bg-center blur-[4px] bg-no-repeat max-md:bg-repeat-y z-0"></div>
+      <body className={`${galindo.className} ${rubikMonoOne.className} ${lacquer.className} ${geistSans.variable} ${geistMono.variable} ${agdasima.className} antialiased h-screen bg-no-repeat`}>
+        <div className="absolute inset-0 bg-[url('../public/Background9.jpg')] bg-cover bg-center blur-[4px] bg-no-repeat max-md:bg-repeat-y z-0 max-sm:h-[146.5vh]">
+        </div>
         <Github />
-        <div className="relative z-10">{children}</div>
-        <MyName />
+        <div className="relative z-10">{children}
+          {/* <div className="relative mt-2">
+            <MyName />
+          </div> */}
+        </div>
+        {/* <div className="max-md:hidden"> */}
+          <MyName />
+        {/* </div> */}
       </body>
     </html>
   );
