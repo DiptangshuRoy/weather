@@ -71,14 +71,14 @@ export default function WeatherComponent() {
     <div>
       {/* Error message display */}
       {error && <div className="flex justify-center items-center h-[35vh]">
-        <p className="text-red-300 text-xl text-center">
+        <p className="text-red-500 text-xl text-center underline underline-offset-8">
           {error}
         </p>
       </div>}
 
       {/* Input and button for manual input */}
       {useManualInput && (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 md:h-[61vh] max-md:h-[51.5vh]">
           {/* Show this message only if weather is not fetched */}
           {!weather && (
             <span className="flex justify-center text-center">No Problem! Get Weather info by searching your city name</span>

@@ -6,7 +6,7 @@ const MyName = () => {
   return (
     <div className='flex flex-col justify-center items-center w-screen absolute'>
       <div className='flex justify-center'>
-        <footer className="flex justify-center bottom-0 mb-1 bg-orange-400 bg-opacity-15 py-1 rounded-full text-shadow-xl max-md:bg-transparent">
+        <footer className="flex justify-center bottom-0 mb-1 bg-orange-400 bg-opacity-15 md:px-8 py-1 rounded-full text-shadow-xl max-md:bg-transparent">
           Made with love by❤️Diptangshu Roy
         </footer>
       </div>
